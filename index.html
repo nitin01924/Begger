@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Support Me</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+      (function () {
+        emailjs.init("V6DNmhoM7eZn6G6Pd");
+      })();
+    </script>
+
+    <script>
+      window.va =
+        window.va ||
+        function () {
+          (window.vaq = window.vaq || []).push(arguments);
+        };
+      window.va("beforeSend", function (event) {
+        const url = new URL(event.url);
+        url.search = "";
+        return {
+          ...event,
+          url: url.toString(),
+        };
+      });
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      :root {
+        color-scheme: dark;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        padding: 24px 16px;
+        background:
+          radial-gradient(
+            circle at top,
+            rgba(255, 90, 90, 0.14),
+            transparent 34%
+          ),
+          linear-gradient(135deg, #0b0b0b, #8b0000);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        color: white;
+      }
+
+      .container {
+        background: rgba(0, 0, 0, 0.9);
+        padding: 32px 28px;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        max-width: 420px;
+        width: min(100%, 420px);
+        box-shadow: 0 0 30px rgba(196, 0, 0, 0.45);
+        text-align: center;
+        animation: fadeIn 0.8s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .question {
+        font-size: clamp(1.5rem, 2vw + 1rem, 2rem);
+        line-height: 1.2;
+        color: #ff4d4d;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+
+      input,
+      button {
+        width: 100%;
+        padding: 14px 16px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        font: inherit;
+        font-size: 16px;
+      }
+
+      input {
+        background: #111;
+        border: 2px solid #c40000;
+        color: white;
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: #ff4d4d;
+        box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.22);
+      }
+
+      button {
+        background: #c40000;
+        border: none;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition:
+          transform 0.2s ease,
+          background 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      @media (hover: hover) {
+        button:hover {
+          transform: translateY(-1px);
+          background: #ff1a1a;
+          box-shadow: 0 10px 22px rgba(196, 0, 0, 0.28);
+        }
+      }
+
+      .result {
+        margin: 10px 0;
+        min-height: 24px;
+        font-weight: bold;
+        line-height: 1.4;
+      }
+
+      #qrBox {
+        display: none;
+        margin-top: 18px;
+        animation: fadeIn 0.5s ease;
+      }
+
+      #qrBox p {
+        margin: 0 0 12px;
+      }
+
+      #qrBox img {
+        width: min(100%, 220px);
+        border-radius: 12px;
+        border: 2px solid #fff;
+      }
+
+      #volumeCheck {
+        display: flex;
+        position: fixed;
+        inset: 0;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.95);
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(6px);
+        z-index: 1000;
+        flex-direction: column;
+      }
+
+      #volumeCheckBox {
+        background: #111;
+        padding: 30px;
+        border-radius: 14px;
+        width: min(100%, 380px);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+        text-align: center;
+      }
+
+      #volumeCheckBox h2 {
+        color: #ff4d4d;
+        margin-top: 0;
+        font-size: 1.3rem;
+      }
+
+      #volumeCheckBox p {
+        color: #ccc;
+        margin: 12px 0;
+        line-height: 1.5;
+      }
+
+      #volumeCheckBox .volume-warning {
+        background: rgba(255, 77, 77, 0.15);
+        border-left: 4px solid #ff4d4d;
+        padding: 12px;
+        margin: 15px 0;
+        border-radius: 6px;
+        text-align: left;
+      }
+
+      .volume-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .volume-buttons button {
+        flex: 1;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .volume-buttons button:first-child {
+        background: #333;
+        color: #ccc;
+      }
+
+      .volume-buttons button:first-child:hover {
+        background: #444;
+      }
+
+      .volume-buttons button:last-child {
+        background: #c40000;
+        color: white;
+      }
+
+      .volume-buttons button:last-child:hover {
+        background: #ff1a1a;
+      }
+
+      #popup {
+        display: none;
+        position: fixed;
+        inset: 0;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(6px);
+        z-index: 999;
+      }
+
+      #popupBox {
+        background: #111;
+        padding: 25px;
+        border-radius: 14px;
+        width: min(100%, 340px);
+        max-height: min(90vh, 520px);
+        overflow-y: auto;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      }
+
+      #popupBox h3 {
+        margin-top: 0;
+      }
+
+      @media (max-width: 640px) {
+        body {
+          padding: 14px;
+          align-items: flex-start;
+        }
+
+        .container {
+          margin-top: 10px;
+          padding: 24px 18px;
+          border-radius: 16px;
+        }
+
+        .question {
+          margin-bottom: 16px;
+        }
+
+        input,
+        button {
+          margin-bottom: 12px;
+        }
+
+        #popup {
+          padding: 12px;
+          align-items: flex-end;
+        }
+
+        #popupBox {
+          width: 100%;
+          border-radius: 16px 16px 12px 12px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="volumeCheck">
+      <div id="volumeCheckBox">
+        <h2>🔊 Volume Check Required</h2>
+        <p>
+          Please adjust your device's media volume to
+          <strong>30-40%</strong> before continuing.
+        </p>
+
+        <div class="volume-warning">
+          <strong>⚠️ Important:</strong> If your volume is too low, you won't
+          hear the audio. Make sure to increase your device's volume!
+        </div>
+
+        <p style="color: #888; font-size: 0.9rem">
+          Once you've set the volume, click "I'm Ready" to continue.
+        </p>
+
+        <div class="volume-buttons">
+          <button onclick="showVolumeSettings()">Open Volume Settings</button>
+          <button onclick="confirmVolume()">I'm Ready ✓</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="question">Would you give me some money?</div>
+
+      <input id="answer" placeholder="Type yes or no" />
+
+      <button onclick="handleAnswer()">Check</button>
+
+      <div class="result" id="result"></div>
+
+      <div id="qrBox">
+        <p>Scan &amp; Pay below</p>
+        <img src="GooglePay_QR (1).png" alt="UPI QR" />
+      </div>
+
+      <audio id="happy" src="happy.mpeg"></audio>
+      <audio id="sad" src="sad.mp3"></audio>
+    </div>
+
+    <div id="popup">
+      <div id="popupBox">
+        <h3>Enter Details</h3>
+
+        <input id="name" placeholder="Your Name" />
+        <input id="city" placeholder="Your City" />
+        <input id="amount" type="number" placeholder="Enter Amount in INR" />
+
+        <button onclick="submitData()">Continue</button>
+      </div>
+    </div>
+
+    <script>
+      let volumeConfirmed = false;
+
+      // Show volume check on page load
+      window.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("volumeCheck").style.display = "flex";
+        // Auto-close after 8 seconds if user confirms early
+        setTimeout(() => {
+          if (volumeConfirmed) {
+            document.getElementById("volumeCheck").style.display = "none";
+          }
+        }, 1500);
+      });
+
+      function confirmVolume() {
+        volumeConfirmed = true;
+        document.getElementById("volumeCheck").style.display = "none";
+        document.getElementById("answer").focus();
+      }
+
+      function showVolumeSettings() {
+        // Show an alert directing them to volume settings
+        alert(
+          "To open volume settings:\n\n" +
+            "Windows: Right-click speaker icon in taskbar > Open Volume mixer\n" +
+            "Mac: Click System Preferences > Sound\n" +
+            "Phone: Use hardware volume buttons or settings app\n\n" +
+            "Set to 30-40% and come back here!",
+        );
+      }
+
+      function handleAnswer() {
+        if (!volumeConfirmed) {
+          alert("⚠️ Please confirm your volume is set to 30-40% first!");
+          document.getElementById("volumeCheck").style.display = "flex";
+          return;
+        }
+
+        const answer = document
+          .getElementById("answer")
+          .value.toLowerCase()
+          .trim();
+        const result = document.getElementById("result");
+        const sad = document.getElementById("sad");
+
+        if (answer === "yes") {
+          document.getElementById("popup").style.display = "flex";
+        } else if (answer === "no") {
+          result.textContent = "Okay, no problem.";
+          result.style.color = "#ff3b3b";
+
+          document.getElementById("qrBox").style.display = "none";
+
+          sad.currentTime = 0;
+          sad.play().catch(() => {});
+        } else {
+          result.textContent = "Type yes or no only";
+          result.style.color = "#ffaa00";
+        }
+      }
+
+      function submitData() {
+        const name = document.getElementById("name").value.trim();
+        const city = document.getElementById("city").value.trim();
+        const amount = document.getElementById("amount").value.trim();
+        const answer = document.getElementById("answer").value;
+
+        const result = document.getElementById("result");
+        const happy = document.getElementById("happy");
+
+        if (!name || !city || !amount) {
+          alert("Fill all fields");
+          return;
+        }
+
+        emailjs.send(
+          "service_sr54gkk",
+          "template_h309p5d",
+          {
+            name,
+            city,
+            answer,
+            amount,
+          },
+          "V6DNmhoM7eZn6G6Pd",
+        );
+
+        document.getElementById("popup").style.display = "none";
+
+        result.textContent = `Scan & pay INR ${amount} below`;
+        result.style.color = "#00ff88";
+
+        document.getElementById("qrBox").style.display = "block";
+
+        happy.currentTime = 0;
+        happy.play().catch(() => {});
+      }
+    </script>
+  </body>
+</html>
